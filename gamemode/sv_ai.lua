@@ -109,9 +109,9 @@ end
 
 local function WaveEnded( id )
 	if (SUSPENDED) then return end
+	print("-----------wave----------")
 	print(Waves[ id ])
-	print("------------------")
-	local GM.curwav = Waves[ id ]
+	local curwav = Waves[ id ]
 	Session.WavesDefeated[ id ] = true
 	/*if (curwav[ 6 ]) then
 		GAMEMODE:GiveGlobalMoney( player.GetAll(), curwav[6] )
@@ -119,7 +119,7 @@ local function WaveEnded( id )
 	end*/
 	local castle = td_ents.GetCastle()
 	if (castle && castle:IsValid() && (castle.HP < 100)) then Session.Flawless = false end
-	if (GM.curwav[ 7 ]) then td_ents.HealCastle( GM.curwav[ 7 ] ) end
+	if (curwav[ 7 ]) then td_ents.HealCastle( curwav[ 7 ] ) end
 	if (!Waves[ id + 1 ]) then
 		WaveInProgress = false
 		GAMEMODE:EndGame( true )

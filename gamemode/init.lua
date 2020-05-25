@@ -7,6 +7,7 @@
 require( "glon" )
 //require( "datastream" )
 AddCSLuaFile( "includes/modules/sh_towers.lua" )
+AddCSLuaFile( "includes/modules/datastream.lua" )
 AddCSLuaFile("shared.lua")
 --AddCSLuaFile("sh_ages.lua")
 
@@ -50,6 +51,7 @@ resource.AddDir( "materials/models/GMODTD/smgtower" )
 resource.AddDir( "materials/models/GMODTD/shotguntower" )
 resource.AddDir( "materials/models/GMODTD/snipertower" )
 
+util.AddNetworkString("TDDataStreamToClient")
 
 function GM:Tick()
 	self.BaseClass.Tick( self )
@@ -62,25 +64,31 @@ function GM:Tick()
 end
 
 function GM:EndGame( won )
-	if (self.GameEnded) then return end
-	self.GameEnded = true
-	player.CallOnAll( "Freeze", true )
-	umsg.Start( "_gameover" )
-		umsg.Bool( won == true )
-		umsg.Short( 20 )
-	umsg.End()
-	local session = td_ai.GetSession()
-	for _, ply in pairs( player.GetAll() ) do
-		datastream.StreamToClients( ply, "td_session", session )
-	end
-	local reward = (session.CastleHealth or 0) + (table.maxn( session.WavesDefeated or {} ) or 0)
-	if (reward < 0) then reward = 0 end
-	// GAMEMODE:GiveGlobalMoney( player.GetAll(), reward )
-	self.FullResetAt = CurTime() + 20
-	// Send gameover status to lobby here
-	// timer.Simple( 1, gameserver.SendGameOverStatus, (won == true) )
-	td_ai.SUSPEND()
+    if (self.GameEnded) then return end
+    self.GameEnded = true
+    player.CallOnAll( "Freeze", true )
+    umsg.Start( "_gameover" )
+        umsg.Bool( won == true )
+        umsg.Short( 20 )
+    umsg.End()
+    local session = td_ai.GetSession()
+	print("end Game")
+    net.Start("TDDataStreamToClient")
+        net.WriteTable(seesion)
+    net.Broadcast()
+    
+    -- for _, ply in pairs( player.GetAll() ) do
+    --     datastream.StreamToClients( ply, "td_session", session )
+    -- end
+    local reward = (session.CastleHealth or 0) + (table.maxn( session.WavesDefeated or {} ) or 0)
+    if (reward < 0) then reward = 0 end
+    // GAMEMODE:GiveGlobalMoney( player.GetAll(), reward )
+    self.FullResetAt = CurTime() + 20
+    // Send gameover status to lobby here
+    // timer.Simple( 1, gameserver.SendGameOverStatus, (won == true) )
+    td_ai.SUSPEND()
 end
+
 
 function GM:SendWave( wave )
 	if (self.GameEnded) then return end

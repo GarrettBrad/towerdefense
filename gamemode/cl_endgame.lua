@@ -19,10 +19,11 @@ function GM:ShowEndGame()
 	
 end
 
-local function dsSession( handler, id, enc, dec )
-	SessionData = dec
+local function dsSession( len )
+    SessionData = net.ReadTable()
 end
---datastream.Hook( "td_session", dsSession )
+net.Receive("TDDataStreamToClient", dsSession)
+
 
 local colGreen = Color( 0, 255, 0 )
 local colRed = Color( 255, 0, 0 )
@@ -150,7 +151,7 @@ function PANEL:Paint()
 	end
 	draw.SimpleText( "Tower Defense - Game Over", "ScoreboardHead", self:GetWide()*0.5, 0, color_white, 1, TEXT_ALIGN_TOP )
 end
-function PANEL:PerformLayout()
+function PANEL:InvalidateLayout()
 	local w, h = self:GetSize()
 	self.LeftP:SetPos( 5, 45 )
 	self.LeftP:SetSize( w*0.5 - 8, h-50 )

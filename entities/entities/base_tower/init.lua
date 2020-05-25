@@ -323,7 +323,7 @@ function ENT:FireAt( t, ent )
 	if (!ent.SnapPos) then ent.SnapPos = (ent:OBBMins() + ent:OBBMaxs()) * 0.5 end
 	local targetpos = ent:LocalToWorld( ent.SnapPos )
 	local aimvec = targetpos - self.Entity:GetPos()
-print(aimvec)
+      print(aimvec)
 	if (t.FreezeOnHit) then
 		ent:FreezeFor( t.FreezeTime )
 	end
@@ -343,18 +343,25 @@ print(aimvec)
 		
 	if (t.MuzzleFlash) then
 		local pos = self.Entity:GetPos()
+		--print(aimvec:Normalize())
+		--print(aimvec:Normalize()*8)
 		if (t.MuzzleFlashOffset) then pos = pos + t.MuzzleFlashOffset end
-		local epos = pos + (aimvec:Normalize()*8)
+		local epos = pos
+		local tempVec = aimvec
+		tempVec:Normalize()
+		tempVec:Mul(8)
+		epos:Add(tempVec)
+
 		local e = EffectData()
 		e:SetStart( epos )
 		e:SetOrigin( epos )
-		e:SetAngle( Vector(-aimvec.x,-aimvec.y,aimvec.z):Angle() )
+		e:SetAngles( Vector(-aimvec.x,-aimvec.y,aimvec.z):Angle() )
 		e:SetMagnitude( 1 )
 		e:SetScale( 1 )
 		util.Effect( t.MuzzleFlash, e )
 		e:SetStart( epos )
 		e:SetOrigin( epos )
-		e:SetAngle( aimvec:Angle() )
+		e:SetAngles( aimvec:Angle() )
 		e:SetMagnitude( 1 )
 		e:SetScale( 1 )
 		util.Effect( "MuzzleEffect", e )

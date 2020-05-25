@@ -401,7 +401,7 @@ AddWave( "monster_headcrab", 10, 2, "NORMAL" )
 // Note: The following code is unfinished, it was never uploaded to the servers (as of 4th October 2009)
 // It may or may not work, you can use the syntax above to add your own waves
 
-/*local RandomAll = { "monster_headcrab", "monster_fastheadcrab", "monster_ztorso", "monster_fastzombie", "monster_poisonzomb" }
+local RandomAll = { "monster_headcrab", "monster_fastheadcrab", "monster_ztorso", "monster_fastzombie", "monster_poisonzomb" }
 local RandomHeadcrab = { "monster_headcrab", "monster_fastheadcrab" }
 // You can make tables with any combination of monster you like
 
@@ -442,4 +442,4 @@ AddWave( RandomAll,	 10,	 2,	 "NORMAL")
 AddWave( RandomAll,	 10,	 2,	 "NORMAL")
 AddWave( RandomAll, 	 10,	 2,	 "NORMAL")
 AddWave( RandomAll,	 10,	 2,	 "NORMAL")
-AddWave( RandomAll,	 1,		 2,	 "BOSS", 	 "boss", 60) */
+AddWave( RandomAll,	 1,		 2,	 "BOSS", 	 "boss", 60) 

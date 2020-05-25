@@ -133,7 +133,7 @@ function GM:Has( name )
 		RunConsoleCommand( "td_refreshupgrades" )
 		return
 	end
-	return SinglePlayer() || self.Upgrades[ name ]
+	return game.SinglePlayer() || self.Upgrades[ name ]
 end
 
 
