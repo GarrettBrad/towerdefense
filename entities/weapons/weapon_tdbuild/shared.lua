@@ -24,9 +24,9 @@ SWEP.GridSnap				= 8
 SWEP.MinimumTowerDistance	= 24
 
 function SWEP:GetCastlePos()
-	if (SERVER) then return td_ents.GetCastlePos() end
-	if (CLIENT) then return GetGlobalVector( "castle_pos" ) end
+    return GetGlobalVector( "castle_pos" )
 end
+
 
 local mins = Vector( 0, 0, 0 )
 local maxs = Vector( 0, 0, 0 )

@@ -106,8 +106,13 @@ function ENT:Upgrade()
 		self.Entity:SetSequence( self.Anim )
 		if (dat.AnimationSpeed) then self.Entity:SetPlaybackRate( dat.AnimationSpeed ) end
 		timer.Remove( self.Entity:EntIndex() .. "_anim" )
-		timer.Create( self.Entity:EntIndex() .. "_anim", self.Entity:SequenceDuration(), 0,
-			self.Entity.ResetSequence, self.Entity, self.Anim );
+		timer.Create( self.Entity:EntIndex() .. "_anim", 
+            self.Entity:SequenceDuration(), 
+            0,
+            function ()
+                self.Entity.ResetSequence(self.Entity, self.Anim)
+            end )
+
 	end
 end
 
@@ -269,7 +274,7 @@ function ENT:Tick( t )
 		end
 		if (#targets > 0) then
 			local ent = self:SelectTarget( targets )
-			if (ValidEntity( ent )) then
+			if (IsValid( ent )) then
 				// Target locked, aim and prepare to fire!
 				target = ent
 				status = STATUS_ATTACKING
@@ -318,7 +323,7 @@ function ENT:FireAt( t, ent )
 	if (!ent.SnapPos) then ent.SnapPos = (ent:OBBMins() + ent:OBBMaxs()) * 0.5 end
 	local targetpos = ent:LocalToWorld( ent.SnapPos )
 	local aimvec = targetpos - self.Entity:GetPos()
-
+print(aimvec)
 	if (t.FreezeOnHit) then
 		ent:FreezeFor( t.FreezeTime )
 	end

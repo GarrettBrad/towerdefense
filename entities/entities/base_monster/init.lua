@@ -186,6 +186,7 @@ function ENT:Tick( m )
 		return
 	end
 	local targetpos = td_ents.GetNodePos( rt, tid )
+	--print(targetpos)
 	if (!self.TargetPos) then self.TargetPos = targetpos end
 	local cpos = self.Entity:GetPos()
 	if ((targetpos-cpos):Length() <= 32) then
@@ -194,7 +195,10 @@ function ENT:Tick( m )
 	end
 	local tpos = self.TargetPos
 	local phys = self.Entity:GetPhysicsObject()
-	local aim = (tpos-cpos):Normalize()
+	local aim = nil
+    tpos:Sub(cpos)
+    aim = tpos
+    aim:Normalize()
 	if (m.FixedAngle) then
 		local oldaim = self.OldAim or aim
 		self.OldAim = aim

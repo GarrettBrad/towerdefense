@@ -75,8 +75,8 @@ function ENT:DrawBounds( radius )
 	for i=1, Points do
 		// Calculate the position
 		local ang = i * angperpoint
-		local nx = ox + (math.sin( math.Deg2Rad( ang ) ) * radius)
-		local ny = oy + (math.cos( math.Deg2Rad( ang ) ) * radius)
+		local nx = ox + (math.sin( math.rad( ang ) ) * radius)
+		local ny = oy + (math.cos( math.rad( ang ) ) * radius)
 		Temp.x = nx
 		Temp.y = ny
 		
@@ -85,8 +85,8 @@ function ENT:DrawBounds( radius )
 	end
 	
 	// Finialise the beam
-	local nx = ox + (math.sin( math.Deg2Rad( 0 ) ) * radius)
-	local ny = oy + (math.cos( math.Deg2Rad( 0 ) ) * radius)
+	local nx = ox + (math.sin( math.rad( 0 ) ) * radius)
+	local ny = oy + (math.cos( math.rad( 0 ) ) * radius)
 	Temp.x = nx
 	Temp.y = ny
 	render.AddBeam( Temp, 16, CurTime() + (i * 1/Points), BoundColour )

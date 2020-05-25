@@ -25,7 +25,9 @@ end
    Desc: Reads and updates this entity's scale
 ---------------------------------------------------------*/
 function ENT:UpdateScale()
-	local scale = self:GetNWVector( "ModelScale" )
+--TODO: Fix
+--local scale = self:GetNWVector( "ModelScale" )
+	local scale = 1
 	self:SetModelScale( scale )
 end
 

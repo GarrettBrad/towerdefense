@@ -39,7 +39,7 @@ function SWEP:PrimaryAttack()
 	end
 	local up = tab[5] or ""
 	local upl = tab[6] or 0
-	if (!SinglePlayer()) then
+	if (!game.SinglePlayer()) then
 		if (!ply:HasUpgrade( up, upl )) then
 			ply:ChatPrint( "You may not build that tower!" )
 			return
@@ -77,7 +77,7 @@ function SWEP:AttemptUpgrade( ent )
 		return
 	end
 	local reqlvl = ent:GetLevel() + (tab[6] or 0)
-	if (!SinglePlayer()) then
+	if (!game.SinglePlayer()) then
 		if (!ply:HasUpgrade( ent.Tower.UpgradeName, reqlvl )) then
 			ply:ChatPrint( "You must buy that upgrade from the lobby!" )
 			return
