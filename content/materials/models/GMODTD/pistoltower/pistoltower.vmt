@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+ "$BaseTexture" "models/GMODTD/pistoltower/pistoltower"
+ "$SurfaceProp" "concrete"
+}

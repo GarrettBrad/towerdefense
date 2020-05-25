@@ -158,11 +158,11 @@ function ENT:Tick( m )
 	local rt = self.RouteName
 	if (!rt) then return end
 	local tid = self.TargetID
-	print("----TID----")
-	print(tid)
+
 	if (!tid) then return end
 	local SpeedMult = 1
 		
+
 	if (self.Ignited) then
 		local dmg = self.IgDmg * TickRate
 		self:DealDamage( dmg )
@@ -188,28 +188,26 @@ function ENT:Tick( m )
 		return
 	end
 	local targetpos = td_ents.GetNodePos( rt, tid )
-	print("-----targetpos------")
-	print(targetpos)
+
 	if (!self.TargetPos) then self.TargetPos = targetpos end
 	local cpos = self.Entity:GetPos()
-	print("-----Cpos------")
-	print(cpos)
-	print("-----Node ID------")
-	print(self.TargetID)
-	--print(targetpos:Sub(cpos):Length())
-	local tvec = targetpos:Sub(cpos)
-	print(tvec)
-	if (targetpos:Sub(cpos):Length() <= 60) then
+
+	print((targetpos - cpos):Length())
+
+	if ((targetpos - cpos):Length() <= 60) then
 	--if targetpos:DistToSqr(cpos) < (32*32) then
 		self.TargetID = tid + 1
 		self.TargetPos = td_ents.GetNodePos( rt, self.TargetID )
 	end
-	local tpos = self.TargetPos
+
+	local tpos = self.TargetPos:ToTable()
+	tpos = Vector(tpos[1], tpos[2], tpos[3])
 	local phys = self.Entity:GetPhysicsObject()
 	local aim = nil
-    tpos:Sub(cpos)
-    aim = tpos
-    aim:Normalize()
+	tpos:Sub(cpos)
+	aim = tpos
+	aim:Normalize()
+
 	if (m.FixedAngle) then
 		local oldaim = self.OldAim or aim
 		self.OldAim = aim
@@ -218,6 +216,7 @@ function ENT:Tick( m )
 		if (m.NoPitch) then ang.p = 0 end
 		self:SetAngles( ang )
 	end
+
 	if (phys && phys:IsValid()) then
 		local force = aim * m.Speed * SpeedMultiplier * phys:GetMass() * SpeedMult
 		phys:ApplyForceCenter( force )

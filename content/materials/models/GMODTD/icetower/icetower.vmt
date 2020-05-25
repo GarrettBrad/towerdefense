@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+ "$BaseTexture" "models/GMODTD/icetower/icetower"
+ "$SurfaceProp" "concrete"
+}

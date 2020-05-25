@@ -256,7 +256,7 @@ function ENT:Tick( t )
 	
 	// Get our current status and target
 	local status = self.Status or STATUS_IDLE
-	local target = self.Target or NullEntity()
+	local target = self.Target or NULL
 	
 	// If we are idle....
 	if (status == STATUS_IDLE) then
@@ -295,7 +295,7 @@ function ENT:Tick( t )
 			((self.Entity:GetPos() - target:GetPos()):Length() > t.Range)) then
 			
 			// We lost it, switch back to idle
-			target = NullEntity()
+			target = NULL
 			status = STATUS_IDLE
 		else
 			// We are shooting

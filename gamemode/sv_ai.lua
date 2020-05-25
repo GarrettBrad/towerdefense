@@ -4,7 +4,6 @@
 // *********************************
 // sv_ai.lua - Loads serverside AI functionality
 
-require( "td_ents" )
 
 module( "td_ai", package.seeall )
 
@@ -43,9 +42,7 @@ end
 local function SpawnMonsters( monstertype, lvl )
 	if (SUSPENDED) then return end
 	local rts = td_ents.GetRoutes()
-	print("rts------------")
-	print(rts)
-	PrintTable(td_ents.GetRoutes())
+
 	local tmp = {}
 	for name, _ in pairs( td_ents.GetRoutes() ) do
 		local startpos = td_ents.GetNodePos( name, 0 )
@@ -55,6 +52,7 @@ local function SpawnMonsters( monstertype, lvl )
 		if (ent.Monster && ent.Monster.Float) then
 			ent:SetTargetZ( startpos.z + 16 )
 		end
+		print(monstertype)
 		ent:SetLevel( lvl )
 		ent.RouteName = name
 		ent.TargetID = 1
@@ -84,6 +82,7 @@ local function SpawnNextWave()
 	SpawnInProgress = true
 	timer.Create( "SpawnMonsters_Wave" .. WaveID, dat[3], dat[2], function()
 		local spawned = SpawnMonsters( typ, lvl )
+
 		if (bosswave || globreward) then
 			for _, ent in pairs( spawned ) do
 				ent.IsBoss = bosswave
@@ -98,6 +97,8 @@ local function SpawnNextWave()
 		if (mrem == 0) then SpawnInProgress = false end
 	end )
 	WaveInProgress = true
+	
+
 	return true
 end
 
@@ -112,8 +113,7 @@ end
 
 local function WaveEnded( id )
 	if (SUSPENDED) then return end
-	print("-----------wave----------")
-	print(Waves[ id ])
+
 	local curwav = Waves[ id ]
 	Session.WavesDefeated[ id ] = true
 	/*if (curwav[ 6 ]) then

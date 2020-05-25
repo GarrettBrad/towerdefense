@@ -4,11 +4,14 @@
 // ********************************
 // sv_player.lua - Loads serverside player functionality
 
+-- Calls base PlayerInitSpawn
+-- Gives the player their starting money
 function GM:PlayerInitialSpawn( ply )
 	self.BaseClass.PlayerInitialSpawn( self, ply )
 	ply:GiveMoney( self.StartMoney )
 end
 
+-- I don't even know why they have this
 local function BoolToString( b )
 	if ( b ) then return "1" else return "0" end
 end

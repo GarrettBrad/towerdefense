@@ -4,7 +4,7 @@
 // ********************************
 // init.lua - Loads serverside functionality
 
-require( "glon" )
+// require( "glon" )
 //require( "datastream" )
 AddCSLuaFile( "includes/modules/sh_towers.lua" )
 AddCSLuaFile( "includes/modules/datastream.lua" )
@@ -32,7 +32,8 @@ include( "server/sv_player.lua" )
 include( "server/sv_resource.lua" )
 
 include( "sv_player.lua" )
-include( "sv_entities.lua" )
+include( "td_ents.lua" )
+// include( "sv_entities.lua" )
 include( "sv_ai.lua" )
 
 resource.AddDir( "models/GMODTD/icetower" )
