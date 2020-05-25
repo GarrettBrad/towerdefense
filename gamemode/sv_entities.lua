@@ -5,6 +5,12 @@
 // sv_entities.lua - Loads serverside entities
 
 local meta = FindMetaTable( "Entity" )
+
+-- Legacy Function // Used by the original creators
+function NullEntity()
+	return NULL
+end
+
 function meta:GetCentralPos()
 	local offset = self._OFFSET
 	if (!offset) then
@@ -16,9 +22,9 @@ end
 
 require( "scripted_ents" )
 if (!scripted_ents) then 
-print("MISSING scripted_ents !!!!!!!!!!!!!!!!!!!!")
-return
- end
+	print("MISSING scripted_ents !!!!!!!!!!!!!!!!!!!!")
+	return
+end
 
 local function RegisterPointEntity( class, tab )
 	scripted_ents.Register( tab or {
@@ -27,7 +33,9 @@ local function RegisterPointEntity( class, tab )
 		KeyValue = function( ent, key, val )
 			ent.Data = ent.Data or {}
 			ent.Data[ key ] = val
-		end }, class, true )
+		end }, 
+		class, 
+		true )
 end
 
 local function RegisterBrushEntity( class, tab )
@@ -55,10 +63,6 @@ local RouteNames = {}
 
 local function IsValidEnt( ent )
 	return ent && ent:IsValid()
-end
-
-function NullEntity()
-	return NULL
 end
 
 local function CacheRelevantInfo()
