@@ -1,0 +1,5 @@
+"UnlitGeneric"
+{
+	"$basetexture"		"GMODTD/hud_moneybar"
+	"$translucent" "1"
+}

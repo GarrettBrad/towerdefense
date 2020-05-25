@@ -1,0 +1,8 @@
+"UnlitGeneric"
+{
+	"$basetexture"		"gui/td/upperleft-rounded-bordered"
+	"$ignorez"		1
+	"$vertexcolor" 		1
+	"$vertexalpha" 		1
+	"$nolod" 		1
+}

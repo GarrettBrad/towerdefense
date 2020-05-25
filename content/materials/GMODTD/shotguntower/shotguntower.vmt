@@ -1,0 +1,5 @@
+"VertexLitGeneric"
+{
+ "$BaseTexture" "models/GMODTD/shotguntower/shotguntower"
+ "$SurfaceProp" "concrete"
+}
