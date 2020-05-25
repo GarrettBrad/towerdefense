@@ -137,3 +137,25 @@ function GM:Tick()
 	end
 end
 
+local MdlList = {
+"models/player/alyx.mdl",
+"models/player/barney.mdl",
+"models/player/breen.mdl",
+"models/player/p2_chell.mdl",
+"models/player/eli.mdl",
+"models/player/gman_high.mdl",
+"models/player/kleiner.mdl",
+"models/player/mossman.mdl",
+"models/player/Group01/female_01.mdl",
+"models/player/Group01/female_05.mdl",
+"models/player/Group01/male_03.mdl",
+"models/player/Group01/male_04.mdl",
+"models/player/Group01/male_09.mdl",
+}
+
+--[[-------------------------------------------------------------------------
+Sets the player model randomly off the given table
+---------------------------------------------------------------------------]]
+function GM:PlayerSetModel( ply )
+    ply:SetModel(MdlList[math.random(#MdlList)])
+end 

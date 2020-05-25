@@ -43,8 +43,11 @@ end
 local function SpawnMonsters( monstertype, lvl )
 	if (SUSPENDED) then return end
 	local rts = td_ents.GetRoutes()
+	print("rts------------")
+	print(rts)
+	PrintTable(td_ents.GetRoutes())
 	local tmp = {}
-	for name, _ in pairs( rts ) do
+	for name, _ in pairs( td_ents.GetRoutes() ) do
 		local startpos = td_ents.GetNodePos( name, 0 )
 		local ent = ents.Create( monstertype )
 		ent:SetPos( startpos )

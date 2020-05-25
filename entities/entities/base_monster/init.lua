@@ -158,6 +158,8 @@ function ENT:Tick( m )
 	local rt = self.RouteName
 	if (!rt) then return end
 	local tid = self.TargetID
+	print("----TID----")
+	print(tid)
 	if (!tid) then return end
 	local SpeedMult = 1
 		
@@ -186,10 +188,19 @@ function ENT:Tick( m )
 		return
 	end
 	local targetpos = td_ents.GetNodePos( rt, tid )
-	--print(targetpos)
+	print("-----targetpos------")
+	print(targetpos)
 	if (!self.TargetPos) then self.TargetPos = targetpos end
 	local cpos = self.Entity:GetPos()
-	if ((targetpos-cpos):Length() <= 32) then
+	print("-----Cpos------")
+	print(cpos)
+	print("-----Node ID------")
+	print(self.TargetID)
+	--print(targetpos:Sub(cpos):Length())
+	local tvec = targetpos:Sub(cpos)
+	print(tvec)
+	if (targetpos:Sub(cpos):Length() <= 60) then
+	--if targetpos:DistToSqr(cpos) < (32*32) then
 		self.TargetID = tid + 1
 		self.TargetPos = td_ents.GetNodePos( rt, self.TargetID )
 	end

@@ -21,10 +21,9 @@ function meta:GetCentralPos()
 end
 
 require( "scripted_ents" )
-if (!scripted_ents) then 
-	print("MISSING scripted_ents !!!!!!!!!!!!!!!!!!!!")
+--[[if (!scripted_ents) then 
 	return
-end
+end]]
 
 local function RegisterPointEntity( class, tab )
 	scripted_ents.Register( tab or {
@@ -66,10 +65,13 @@ local function IsValidEnt( ent )
 end
 
 local function CacheRelevantInfo()
+	print("Getting data")
 	caves = ents.FindByClass( "info_cave" )
 	nodes = ents.FindByClass( "info_ainode" )
 	castle = ents.FindByClass( "info_castle" )[1] or NullEntity()
-
+	print(#nodes)
+	PrintTable(nodes)
+	PrintTable(caves)
 	castlepos = castle:GetPos()
 	SetGlobalVector( "castle_pos", castlepos )
 	
@@ -94,7 +96,9 @@ local function CacheRelevantInfo()
 		end
 		table.insert( RouteNames, name )
 		Routes[ name ] = tmp
+		
 	end
+	PrintTable(Routes)
 end
 
 function GetCastle()
@@ -114,7 +118,9 @@ function IsInRangeOfCastle( ent )
 	return (ent:GetPos() - castle:GetPos()):Length() <= 32
 end
 
+
 local function InitPostEntity()
+	print("InitPostEntity")
 	CacheRelevantInfo()
 	if (castle && castle:IsValid()) then
 		local ent = ents.Create( "castle" )
@@ -123,9 +129,11 @@ local function InitPostEntity()
 		castle_ent = ent
 	end
 end
-hook.Add( "InitPostEntity", "ENTS:Init", InitPostEntity )
+hook.Add( "InitPostEntity", "ENTSInit", InitPostEntity )
 
 function GetRoutes()
+ PrintTable(Routes)
+
 	return Routes
 end
 
