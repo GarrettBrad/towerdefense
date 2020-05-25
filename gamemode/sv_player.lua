@@ -86,7 +86,7 @@ end
 
 function GM:SpawnTower( classname, pos, normal, ply )
 	local ent = ents.Create( classname )
-	ent:SetAngles( normal:Angle():Up() )
+	ent:SetAngles( normal:Angle():Up():Angle() )
 	ent:Spawn()
 	local obbmins = ent:OBBMins()
 	ent:SetPos( pos - (obbmins.z * normal) )

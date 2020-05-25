@@ -194,7 +194,12 @@ function ENT:Tick( m )
 	end
 	local tpos = self.TargetPos
 	local phys = self.Entity:GetPhysicsObject()
-	local aim = (tpos-cpos):Normalize()
+	local aim = nil
+
+	tpos:Sub(cpos)
+	aim = tpos
+	aim:Normalize()
+
 	if (m.FixedAngle) then
 		local oldaim = self.OldAim or aim
 		self.OldAim = aim

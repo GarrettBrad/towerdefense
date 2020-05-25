@@ -26,7 +26,8 @@ end
 ---------------------------------------------------------*/
 function ENT:UpdateScale()
 	local scale = self:GetNWVector( "ModelScale" )
-	self:SetModelScale( scale )
+
+	self:SetModelScale( 1 ) -- TODO: FIX THIS -- model scale is vecotor and should be a number
 end
 
 /*---------------------------------------------------------

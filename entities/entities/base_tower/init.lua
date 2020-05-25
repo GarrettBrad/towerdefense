@@ -106,8 +106,12 @@ function ENT:Upgrade()
 		self.Entity:SetSequence( self.Anim )
 		if (dat.AnimationSpeed) then self.Entity:SetPlaybackRate( dat.AnimationSpeed ) end
 		timer.Remove( self.Entity:EntIndex() .. "_anim" )
-		timer.Create( self.Entity:EntIndex() .. "_anim", self.Entity:SequenceDuration(), 0,
-			self.Entity.ResetSequence, self.Entity, self.Anim );
+		timer.Create( self.Entity:EntIndex() .. "_anim", 
+			self.Entity:SequenceDuration(), 
+			0,
+			function ()
+				self.Entity:ResetSequence(self.Anim)
+			end )
 	end
 end
 

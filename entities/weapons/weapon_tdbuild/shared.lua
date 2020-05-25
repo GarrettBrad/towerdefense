@@ -24,14 +24,14 @@ SWEP.GridSnap				= 8
 SWEP.MinimumTowerDistance	= 24
 
 function SWEP:GetCastlePos()
-	if (SERVER) then return td_ents.GetCastlePos() end
-	if (CLIENT) then return GetGlobalVector( "castle_pos" ) end
+	return GetGlobalVector( "castle_pos" )
 end
 
 local mins = Vector( 0, 0, 0 )
 local maxs = Vector( 0, 0, 0 )
 function SWEP:TargetLocationValid( pos, norm )
 	local norma = norm:Angle()
+
 	local z = self:GetCastlePos().z
 	if (pos.z < (z+8)) then return false end
 	if not ((norma.p > 240) && (norma.p < 300)) then return false end

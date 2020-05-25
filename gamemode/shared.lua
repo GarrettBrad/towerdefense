@@ -14,40 +14,44 @@ LoadMenus( "td2_game" )
 GM.Name = "Tower Defense - Game"
 GM.Author = "thomasfn"
 
+function math.Deg2Rad(number)
+	return math.rad(number)
+end 
+
 // ------------------------------------------------------------------------------------------------------------------
 // CONFIGURABLE OPTIONS
 // ------------------------------------------------------------------------------------------------------------------
 
-	function AddWave( MonsterType, Amount, SpawnDelay, WaveType, WaveLevel, Reward, CastleHeal )
-		table.insert( GM.Waves, { MonsterType, Amount, SpawnDelay, WaveType, WaveLevel, Reward, CastleHeal } )
-	end
-	
-	function AddTower( EntClass, TowerName, TowerCost, Description, UpgradeName, UpgradeLvl )
-		if type( TowerCost ) != "table" then TowerCost = { TowerCost } end
-		table.insert( GM.Towers, { EntClass, TowerName, TowerCost, Description or "", UpgradeName, UpgradeLvl } )
-	end
-	
-	GM.Waves = {}
-	GM.Towers = {}
-	include("includes/modules/sh_towers.lua")
+function AddWave( MonsterType, Amount, SpawnDelay, WaveType, WaveLevel, Reward, CastleHeal )
+	table.insert( GM.Waves, { MonsterType, Amount, SpawnDelay, WaveType, WaveLevel, Reward, CastleHeal } )
+end
 
-	print("TOWERS")
-	
-	require("sh_towers")
-	
-	include( "GAMECONFIG.lua" )
-	if (SERVER) then AddCSLuaFile( "GAMECONFIG.lua" ) end
-	
-	GameEvents = {
-		{ 180, function()
-			if ( CLIENT ) then
-				
-			end
-			if ( SERVER ) then
-				GAMEMODE:StartGame()
-			end
-		end }
-	}
+function AddTower( EntClass, TowerName, TowerCost, Description, UpgradeName, UpgradeLvl )
+	if type( TowerCost ) != "table" then TowerCost = { TowerCost } end
+	table.insert( GM.Towers, { EntClass, TowerName, TowerCost, Description or "", UpgradeName, UpgradeLvl } )
+end
+
+GM.Waves = {}
+GM.Towers = {}
+include("includes/modules/sh_towers.lua")
+
+print("TOWERS")
+
+require("sh_towers")
+
+include( "GAMECONFIG.lua" )
+if (SERVER) then AddCSLuaFile( "GAMECONFIG.lua" ) end
+
+GameEvents = {
+	{ 180, function()
+		if ( CLIENT ) then
+			
+		end
+		if ( SERVER ) then
+			GAMEMODE:StartGame()
+		end
+	end }
+}
 
 // ------------------------------------------------------------------------------------------------------------------
 
