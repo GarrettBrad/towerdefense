@@ -136,10 +136,9 @@ function PANEL:Setup( sessiondata )
 	right:SetSpacing( 5 )
 	right:EnableHorizontal( false )
 	right:EnableVerticalScrollbar( true )
-	right.Paint = function() 
-	local w, h = self:GetSize()
-	right:SetPos( w*0.5 + 3, 45 )
-	right:SetSize( w*0.5 - 8, h-50 )
+	right.Paint = function(p, w, h)
+		right:SetPos( w*0.5 + 3, 45 )
+		right:SetSize( w*0.5 - 8, h-50 )
 	end
 	
 	i = 1
@@ -155,13 +154,13 @@ function PANEL:Setup( sessiondata )
 	
 
 end
-function PANEL:Paint()
+function PANEL:Paint(w, h)
 	local BTL = GAMEMODE.BackToLobby
 	if (BTL) then
 		local timeleft = tostring( math.Round( BTL - CurTime() ) )
-		draw.SimpleText( timeleft, "ScoreboardHead", self:GetWide()*0.5, self:GetTall()*0.8, color_white, 1, 1 )
+		draw.SimpleText( timeleft, "ScoreboardHead", w*0.5, h*0.8, color_white, 1, 1 )
 	end
-	draw.SimpleText( "Tower Defense - Game Over", "ScoreboardHead", self:GetWide()*0.5, 0, color_white, 1, TEXT_ALIGN_TOP )
+	draw.SimpleText( "Tower Defense - Game Over", "ScoreboardHead", w*0.5, 0, color_white, 1, TEXT_ALIGN_TOP )
 end
 function PANEL:InvalidateLayout()
 
