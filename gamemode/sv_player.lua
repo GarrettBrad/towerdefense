@@ -92,13 +92,19 @@ function GM:SpawnTower( classname, pos, normal, ply )
 	local ent = ents.Create( classname )
 	ent:SetAngles( normal:Angle():Up():Angle() )
 	ent:Spawn()
+
 	local obbmins = ent:OBBMins()
 	ent:SetPos( pos - (obbmins.z * normal) )
 	ent.Owner = ply
-	if (!ply.TowerCount) then ply.TowerCount = 0 end
+
+	if (!ply.TowerCount) then 
+		ply.TowerCount = 0 
+	end
+
 	ply.TowerCount = ply.TowerCount + 1
 	ply:SetNWInt( "td_tcnt", ply.TowerCount )
 	ent:SetNWEntity( "owner", ply )
+
 	return ent
 end
 

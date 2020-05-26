@@ -21,6 +21,7 @@ end
 
 local function dsSession( len )
     SessionData = net.ReadTable()
+    print("Game Ended Received Table")
 end
 net.Receive("TDDataStreamToClient", dsSession)
 
@@ -63,6 +64,8 @@ end
 local PANEL = {}
 function PANEL:Setup( sessiondata )
 	// Store the session
+	if not sessiondata then return end -- If the clients ping is to high will be nil
+
 	self.Session = sessiondata
 	
 	// Wave Info

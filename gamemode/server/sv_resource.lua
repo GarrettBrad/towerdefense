@@ -9,7 +9,8 @@ function resource.AddDir( dir )
 
 	if files then 
 
-		for _, f in pairs(files) do
+		for _,f in pairs(files) do
+			print("Added resource: " .. dir .. "/r" .. f)
 			resource.AddFile( dir .. "/" .. f )
 		end
 

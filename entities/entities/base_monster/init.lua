@@ -192,14 +192,14 @@ function ENT:Tick( m )
 	if (!self.TargetPos) then self.TargetPos = targetpos end
 	local cpos = self.Entity:GetPos()
 
-	print((targetpos - cpos):Length())
-
-	if ((targetpos - cpos):Length() <= 60) then
-	--if targetpos:DistToSqr(cpos) < (32*32) then
+	-- Checks if they are close enough to the node to change direction
+	if ((targetpos - cpos):Length() <= 30) then
 		self.TargetID = tid + 1
 		self.TargetPos = td_ents.GetNodePos( rt, self.TargetID )
 	end
 
+	-- Was causing issues, messy but it works. Will clean up later
+	-- TODO: Clean up
 	local tpos = self.TargetPos:ToTable()
 	tpos = Vector(tpos[1], tpos[2], tpos[3])
 	local phys = self.Entity:GetPhysicsObject()

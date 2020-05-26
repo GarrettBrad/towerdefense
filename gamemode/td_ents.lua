@@ -101,7 +101,7 @@ end
 
 -- Heals the castle by the given amount
 function td_ents.HealCastle( amount )
-	GetCastle():Heal( amount )
+	td_ents.GetCastle():Heal( amount )
 end
 
 -- Returns if the entity is in range of the castle for attacking

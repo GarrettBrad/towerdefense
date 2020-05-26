@@ -11,7 +11,6 @@ include( "gui/cl_dermaskin.lua" )
 include( "gui/cl_gui.lua" )
 include( "gui/cl_hud.lua" )
 include( "gui/cl_vgui.lua" )
-include( "sh_towers.lua" )
 include( "cl_hud.lua" )
 include( "cl_endgame.lua" )
 

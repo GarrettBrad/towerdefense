@@ -1,4 +1,4 @@
-
+AddCSLuaFile()
 // ********************************
 // * Tower Defense Gamemode - Game *
 // ********************************
@@ -55,6 +55,7 @@ towers.Register( "tower_pistol", 1, {
 	Animation = "rotation",
 	AnimationSpeed = 0
 } )
+
 towers.Register( "tower_pistol", 2, {
 	Delay = 0.9,
 	Damage = 35,
@@ -62,6 +63,7 @@ towers.Register( "tower_pistol", 2, {
 	AnimationSpeed = 1,
 	Cost = 4
 } )
+
 towers.Register( "tower_pistol", 3, {
 	Delay = 0.8,
 	Damage = 40,
@@ -69,6 +71,7 @@ towers.Register( "tower_pistol", 3, {
 	AnimationSpeed = 2,
 	Cost = 5
 } )
+
 AddTower( "tower_pistol", 	"Pistol Tower", 		{ 10, 4, 5 },
 	towers.CompileDescription( "tower_pistol", 
 		"Weak but an effective and cheap way of dealing with enemies." ),
@@ -99,12 +102,14 @@ towers.Register( "tower_smg", 1, {
 	Animation = "rotation",
 	AnimationSpeed = 0
 } )
+
 towers.Register( "tower_smg", 2, {
 	Damage = 14,
 	DefaultDamage = 14,
 	AnimationSpeed = 1,
 	Cost = 10
 } )
+
 towers.Register( "tower_smg", 3, {
 	Damage = 18,
 	DefaultDamage = 18,
@@ -112,6 +117,7 @@ towers.Register( "tower_smg", 3, {
 	AnimationSpeed = 2,
 	Cost = 12
 } )
+
 AddTower( "tower_smg", 	"SMG Tower", 		{ 25, 10, 12 },
 	towers.CompileDescription( "tower_smg", 
 		"Powerful but slightly expensive means of disposing enemies." ),

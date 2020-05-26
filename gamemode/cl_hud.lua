@@ -19,7 +19,6 @@ surface.CreateFont("ScoreboardSub", {
 } )
 	
 function GM:InitGUI()
-	print("WAS THIS CALLLLLED?")
 	local lbl = vgui.Create( "TDLabel" )
 	lbl.Shadowed = true
 	lbl.Font = "ScoreboardSub"

@@ -4,10 +4,6 @@
 // ********************************
 // init.lua - Loads serverside functionality
 
-// require( "glon" )
-//require( "datastream" )
-AddCSLuaFile( "includes/modules/sh_towers.lua" )
-AddCSLuaFile( "includes/modules/datastream.lua" )
 AddCSLuaFile("shared.lua")
 --AddCSLuaFile("sh_ages.lua")
 
@@ -31,9 +27,9 @@ include( "shared.lua" )
 include( "server/sv_player.lua" )
 include( "server/sv_resource.lua" )
 
+include( "sh_towers.lua" )
 include( "sv_player.lua" )
 include( "td_ents.lua" )
-// include( "sv_entities.lua" )
 include( "sv_ai.lua" )
 
 resource.AddDir( "models/GMODTD/icetower" )
@@ -73,9 +69,9 @@ function GM:EndGame( won )
         umsg.Short( 20 )
     umsg.End()
     local session = td_ai.GetSession()
-	print("end Game")
+
     net.Start("TDDataStreamToClient")
-        net.WriteTable(seesion)
+        net.WriteTable(session)
     net.Broadcast()
     
     -- for _, ply in pairs( player.GetAll() ) do

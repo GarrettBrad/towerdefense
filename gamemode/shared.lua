@@ -33,14 +33,10 @@ end
 
 GM.Waves = {}
 GM.Towers = {}
-include("includes/modules/sh_towers.lua")
 
-print("TOWERS")
-
-require("sh_towers")
+include("sh_towers.lua")
 
 include( "GAMECONFIG.lua" )
-if (SERVER) then AddCSLuaFile( "GAMECONFIG.lua" ) end
 
 GameEvents = {
 	{ 180, function()
