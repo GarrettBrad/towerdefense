@@ -83,9 +83,12 @@ function GM:EndGame( won )
     self.FullResetAt = CurTime() + 20
     // Send gameover status to lobby here
     // timer.Simple( 1, gameserver.SendGameOverStatus, (won == true) )
+	timer.Simple( 20, function() game.LoadNextMap() end )
     td_ai.SUSPEND()
 end
+function PostGame()
 
+end
 
 function GM:SendWave( wave )
 	if (self.GameEnded) then return end

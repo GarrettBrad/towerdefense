@@ -2,8 +2,8 @@
 {
 	"base"		"td2_gamebase"
 	"title"		"Tower Defense"
-	"version"	"1.0"
-	"maps"		"^hw_"
+	"version"	"1.5"
+	"maps"		"^td_"
 	"menusystem"	"1"	
 
 	"info"		"Multiplayer tower defense gamemode"
