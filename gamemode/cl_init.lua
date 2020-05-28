@@ -86,12 +86,15 @@ usermessage.Hook( "_upgrades", function( um )
 	local enc = um:ReadString()
 	local lst = string.Explode( ",", enc )
 	GAMEMODE.Upgrades = {}
+
 	for _, v in pairs( lst ) do
 		local spl = string.Explode( "=", v )
 		local name = spl[1]
 		local has = (spl[2] == "1")
+
 		GAMEMODE.Upgrades[ name ] = has
 	end
+
 	if (um:ReadBool()) then
 		RunConsoleCommand( "-menu" )
 		timer.Simple( 0, RunConsoleCommand, "+menu" )
@@ -132,6 +135,7 @@ function GM:Has( name )
 		RunConsoleCommand( "td_refreshupgrades" )
 		return
 	end
+
 	return game.SinglePlayer() || self.Upgrades[ name ]
 end
 
@@ -139,6 +143,7 @@ end
 ----FROM BASE----
 usermessage.Hook( "_notice", function( um )
 	local pn = GAMEMODE:CreateNotice( um:ReadString() )
+
 	timer.Simple( 5, pn.Remove, pn )
 end )
 
@@ -151,16 +156,19 @@ usermessage.Hook( "_event", function( um )
 	local id = um:ReadShort()
 	local event = GameEvents[ id ]
 	if (!event) then return end
+
 	event[2]()
 	event[3] = true
+
 	local nextevent = GameEvents[ id+1 ]
+
 	if (!nextevent) then return end
-	
 end )
 
 usermessage.Hook( "_timetillnextevent", function( um )
 	GAMEMODE.NextEvent = CurTime() + um:ReadLong()
 	local cnt
+
 	for cnt=1, um:ReadShort() do
 		local event = GameEvents[ cnt ]
 		if (event) then event[3] = true end
@@ -173,21 +181,26 @@ local bluez = Color( 0, 128, 128, 255 )
 local morgreen = Color( 128, 158, 128, 255 )
 usermessage.Hook( "_gschat", function( um )
 	if (!cvShowGSChat:GetBool()) then return end
+
 	local nick = um:ReadString()
 	local text = um:ReadString()
+
 	chat.AddText( bluez, "(Lobby) ", morgreen, nick .. ": ", color_white, text )
 end )
 
 usermessage.Hook( "_gslchat", function( um )
 	if (!cvShowGSChat:GetBool()) then return end
+
 	local nick = um:ReadString()
 	local text = um:ReadString()
+
 	chat.AddText( bluez, "(Global) ", morgreen, nick .. ": ", color_white, text )
 end )
 
 function GM:SecondsToString( secs )
 	local mins = math.floor( secs/60 )
 	local secsleft = secs-(mins*60)
+
 	return mins .. " minutes and " .. secsleft .. " seconds"
 end
 
@@ -199,6 +212,7 @@ function GM:TimeTillNextEvent()
 		end
 		return 0
 	end
+	
 	return math.ceil( self.NextEvent - CurTime() )
 end
 
