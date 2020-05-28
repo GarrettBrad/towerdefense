@@ -105,7 +105,7 @@ function GM:HUDPaint()
 	end
 	if (FadeStatus == 2) then
 		// RunConsoleCommand( "+score" )
-		// self:ShowEndGame()
+		//  self:ShowEndGame()
 		HUDLabel1:Remove()
 		HUDLabel2:Remove()
 		HUDLabel3:Remove()

@@ -11,8 +11,8 @@ end
 
 LoadMenus( "td2_game" )
 
-GM.Name = "Tower Defense - Game"
-GM.Author = "thomasfn"
+GM.Name = "GMod TD"
+GM.Author = "OG: thomasfn Fixed: GRE3N x Pineapple"
 
 function math.Deg2Rad(number)
 	return math.rad(number)
@@ -33,7 +33,7 @@ end
 
 GM.Waves = {}
 GM.Towers = {}
-
+AddCSLuaFile( "sh_towers.lua" )
 include("sh_towers.lua")
 
 include( "GAMECONFIG.lua" )

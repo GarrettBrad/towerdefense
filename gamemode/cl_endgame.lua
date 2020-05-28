@@ -81,7 +81,11 @@ function PANEL:Setup( sessiondata )
 	left:SetSpacing( 5 )
 	left:EnableHorizontal( false )
 	left:EnableVerticalScrollbar( true )
-	left.Paint = function() end
+	left.Paint = function() 
+		local w, h = self:GetSize()
+	left:SetPos( 5, 45 )
+	left:SetSize( w*0.5 - 8, h-50 )
+	end
 	
 	left:AddItem( lblWaves )
 	
@@ -132,7 +136,10 @@ function PANEL:Setup( sessiondata )
 	right:SetSpacing( 5 )
 	right:EnableHorizontal( false )
 	right:EnableVerticalScrollbar( true )
-	right.Paint = function() end
+	right.Paint = function(p, w, h)
+		right:SetPos( w*0.5 + 3, 45 )
+		right:SetSize( w*0.5 - 8, h-50 )
+	end
 	
 	i = 1
 	for name, damage in pairs( sessiondata.PlayerDamage ) do
@@ -145,20 +152,17 @@ function PANEL:Setup( sessiondata )
 	self.LeftP = left
 	self.RightP = right
 	
+
 end
-function PANEL:Paint()
+function PANEL:Paint(w, h)
 	local BTL = GAMEMODE.BackToLobby
 	if (BTL) then
 		local timeleft = tostring( math.Round( BTL - CurTime() ) )
-		draw.SimpleText( timeleft, "ScoreboardHead", self:GetWide()*0.5, self:GetTall()*0.8, color_white, 1, 1 )
+		draw.SimpleText( timeleft, "ScoreboardHead", w*0.5, h*0.8, color_white, 1, 1 )
 	end
-	draw.SimpleText( "Tower Defense - Game Over", "ScoreboardHead", self:GetWide()*0.5, 0, color_white, 1, TEXT_ALIGN_TOP )
+	draw.SimpleText( "Tower Defense - Game Over", "ScoreboardHead", w*0.5, 0, color_white, 1, TEXT_ALIGN_TOP )
 end
 function PANEL:InvalidateLayout()
-	local w, h = self:GetSize()
-	self.LeftP:SetPos( 5, 45 )
-	self.LeftP:SetSize( w*0.5 - 8, h-50 )
-	self.RightP:SetPos( w*0.5 + 3, 45 )
-	self.RightP:SetSize( w*0.5 - 8, h-50 )
+
 end
 vgui.Register( "TDEndGame", PANEL, "PANEL" )

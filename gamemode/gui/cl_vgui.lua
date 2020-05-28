@@ -196,6 +196,7 @@ end
 
 local PANEL = {}
 function PANEL:Paint()
+	--print("Called TDLabel Panel")
 	if (!self.Text) then self.Text = { "Label" } end
 	if (!self.Font) then self.Font = "Default" end
 	local w, h = draw.AdvancedText( self.Text, self.Font, 0, 0, self.Shadowed )
